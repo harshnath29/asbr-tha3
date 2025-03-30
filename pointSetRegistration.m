@@ -15,7 +15,8 @@ function [R, t] = pointSetRegistration(movingPoints, fixedPoints)
     H = centeredMoving' * centeredFixed;
     [U, ~, V] = svd(H);
     R = V * U';
-    
+
+    % Ensure that the R matrix is valid (det(R) = 1)
     if det(R) < 0
         V(:, end) = -V(:, end);
         R = V * U';
